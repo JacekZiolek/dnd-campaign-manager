@@ -1,24 +1,17 @@
+{% extends 'bootstrap.html' %}
+
+{% load bootstrap5 %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>{% block title %}{% endblock %}</title>
 
+{% block title %}Dnd Campaign Manager{% endblock %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/mian.css' %}">
     <script src="{% static 'js/htmx.min.js' %}" defer></script>
-  </head>
+{% endblock %}
 
-  <body>
-    {% block content %}
-    <button hx-get="/hello" hx-trigger="click">Click me!</button>
-
-    <script>
-      document.addEventListener("htmx:afterRequest", function(evt) {
-        if (evt.detail.xhr.responseURL.endsWith("/hello")) {
-          console.log("Hello, world!");
-        }
-      });
-    </script>
-    {% endblock %}
-  </body>
-</html>
+{% block content %}
+  <div class="bg-primary">
+    <h1>test</h1>
+  </div>
+{% endblock %}
