@@ -11,19 +11,22 @@
 {% endblock %}
 
 {% block before_content %}
-<nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Dnd Campaign Manager</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
-      aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+<nav class="navbar bg-dark border-bottom border-body p-2" data-bs-theme="dark">
+  <div class="container-fluid d-flex flex-between">
+    <p class="navbar-brand text-white text-center m-0">Dnd Campaign Manager</p>
+    <div>
+      {% bootstrap_button "Log in" button_class="btn btn-outline-success me-2" href="/accounts/login/" %}
+      {% bootstrap_button "Sign up" button_class="btn btn-sm btn-outline-secondary" href="/accounts/signup/" %}
+    </div>
   </div>
 </nav>
 {% endblock %}
 
 {% block content %}
-<div class="bg-primary">
-  <h1>test</h1>
-</div>
+{% endblock %}
+
+{% block after_content %}
+<footer class="bg-dark text-white text-center p-2 fixed-bottom" data-bs-theme="dark">
+  <p class="m-0">Dnd Campaign Manager</p>
+</footer>
 {% endblock %}

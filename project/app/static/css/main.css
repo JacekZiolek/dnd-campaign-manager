@@ -1,4 +1,5 @@
 body {
   margin: 0;
-  background-color: pink;
+  background: url("../assets/mind_flayer.jpg") no-repeat center center fixed;
+  background-size: cover;
 }
