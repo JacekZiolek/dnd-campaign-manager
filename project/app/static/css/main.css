@@ -3,3 +3,8 @@ body {
   background: url("../assets/mind_flayer.jpg") no-repeat center center fixed;
   background-size: cover;
 }
+
+.bg-body {
+  --bs-bg-opacity: .5;
+  background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
+}

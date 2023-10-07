@@ -10,22 +10,51 @@
 <script src="{% static 'js/htmx.min.js' %}" defer></script>
 {% endblock %}
 
-{% block before_content %}
+{% block bootstrap5_before_content %}
 <nav class="navbar bg-dark border-bottom border-body p-2" data-bs-theme="dark">
   <div class="container-fluid d-flex flex-between">
     <p class="navbar-brand text-white text-center m-0">Dnd Campaign Manager</p>
+    {% if not user.is_authenticated %}
+    <div class="dropdown">
+      <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        <img
+        src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (31).webp"
+        class="rounded-circle"
+        height="32"
+        alt="Avatar"
+        loading="lazy"
+        />
+        Dropdown button
+      </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#">Action</a></li>
+        <li><a class="dropdown-item" href="#">Another action</a></li>
+        <li><a class="dropdown-item" href="#">Something else here</a></li>
+      </ul>
+    </div>
+    {% else %}
     <div>
       {% bootstrap_button "Log in" button_class="btn btn-outline-success me-2" href="/accounts/login/" %}
       {% bootstrap_button "Sign up" button_class="btn btn-sm btn-outline-secondary" href="/accounts/signup/" %}
     </div>
+    {% endif %}
   </div>
 </nav>
 {% endblock %}
 
-{% block content %}
+{% block bootstrap5_content %}
+<div class="container text-center">
+{% block breadcrumbs %}
+  <div class="text-white">breadcrumbs</div>
+{% endblock %}
+</div>
+<div class="container bg-body bg-gradient text-light text-center my-5 py-5">
+  <h2>{% block heading %}{% endblock %}</h2>
+  {% block content %}{% endblock %}
+</div>
 {% endblock %}
 
-{% block after_content %}
+{% block bootstrap5_after_content %}
 <footer class="bg-dark text-white text-center p-2 fixed-bottom" data-bs-theme="dark">
   <p class="m-0">Dnd Campaign Manager</p>
 </footer>
