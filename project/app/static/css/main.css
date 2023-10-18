@@ -8,3 +8,13 @@ body {
   --bs-bg-opacity: .5;
   background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
 }
+
+.form-text,
+.text-muted {
+  color: var(--bs-white) !important;
+}
+
+.form-text ul {
+  list-style-type: none;
+  padding-left: 0;
+}

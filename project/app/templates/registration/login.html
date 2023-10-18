@@ -1,10 +1,27 @@
 {% extends 'base.html' %}
 {% load bootstrap5 %}
 
-{% block title %}Login{% endblock %}
+{% block title %}{% endblock %}
 
-{% block heading %}Login{% endblock %}
+{% block heading %}
+{% if user.is_authenticated %}
+You're logged in as {{ user.username }}
+{% else %}
+Log into your account
+{% endif %}
+{% endblock %}
 
 {% block content %}
-<p>login form goes here</p>
+{% if user.is_authenticated %}
+Some content for logged in users
+{% else %}
+<form action="" method="post" class="form w-50 mx-auto mt-5">
+  {% csrf_token %}
+
+  {% bootstrap_form form class='p-3' %}
+  <br/>
+  {% bootstrap_button button_type="submit" content='Log in' %}
+  {% bootstrap_form_errors form layout='inline' %}
+</form>
+{% endif %}
 {% endblock %}

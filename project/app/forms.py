@@ -3,6 +3,12 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import User, Player, DungeonMaster
 
 
+class SignUpForm(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
+        model = User
+        fields = ('username', 'email', 'password1', 'password2')
+
+
 class PlayerSignUpForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = User

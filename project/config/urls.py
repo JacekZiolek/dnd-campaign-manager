@@ -18,18 +18,16 @@ urlpatterns = [
     path('accounts/', include([
         path('', include('django.contrib.auth.urls')),
         path('signup/', user_passes_test(user_not_authenticated)(
-            TemplateView.as_view(
-                template_name='registration/choose_profile.html'
-            )),
+            user_authentication.SignUpView.as_view()),
             name='signup'),
         path(
             'signup/player/',
-            user_authentication.PlayerSignUpView.as_view(),
+            user_authentication.player_signup,
             name='player_signup'
         ),
         path(
             'signup/dungeon_master/',
-            user_authentication.DungeonMasterSignUpView.as_view(),
+            user_authentication.dungeon_master_signup,
             name='dungeon_master_signup'
         ),
         path('login/', LoginView.as_view(), name='login'),

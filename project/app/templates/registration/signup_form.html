@@ -4,5 +4,26 @@
 {% block title %}Sign Up{% endblock %}
 
 {% block content %}
-<h1>sign up form test</h1>
+<h4>{{ session }}</h4>
+<form
+  id="signup-buttons"
+  class="d-flex justify-content-center"
+  hx-target="#signup-buttons"
+  >
+  {% csrf_token %}
+  <button
+    class="btn btn-primary mx-2"
+    hx-post="{% url 'player_signup' %}"
+    hx-swap="outerHTML"
+    >
+    Player Profile
+  </button>
+  <button
+    class="btn btn-primary mx-2"
+    hx-post="{% url 'dungeon_master_signup' %}"
+    hx-swap="outerHTML"
+    >
+    Dungeon Master Profile
+  </button>
+</form>
 {% endblock %}
