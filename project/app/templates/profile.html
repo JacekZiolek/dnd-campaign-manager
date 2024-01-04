@@ -1,8 +1,13 @@
 {% extends "base.html" %}
 {% load bootstrap5 %}
 
+{% block heading %}Profile{% endblock %}
+
 {% block content %}
-    <h1>Profile</h1>
-    <p>{{ user.username }}</p>
-    <p>{{ user.email }}</p>
+<p>{{ user.username }}</p>
+<p>{{ user.email }}</p>
+<p>{{ user.is_player }}</p>
+<p>{{ user.is_dungeon_master }}</p>
+<img src="{{ user.profile_picture.url }}" alt="profile picture">
+<p>{{ user.profile_picture.url }}</p>
 {% endblock %}
