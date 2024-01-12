@@ -4,8 +4,10 @@
 from django.utils.deprecation import MiddlewareMixin
 
 _excluded_paths = [
-    '/accounts/signup/player/',
-    '/accounts/signup/dungeon_master/',
+    'player',
+    'dungeon_master',
+    'profile_pictures',
+    'favicon.ico'
 ]
 
 
@@ -27,8 +29,12 @@ class BreadcrumbsMiddleware(MiddlewareMixin):
             breadcrumbs = [crumb]
         elif crumb != breadcrumbs[-1]:
             breadcrumbs.append(crumb)
-        if path in _excluded_paths:
-            breadcrumbs.remove(crumb)
+
+        for ep in _excluded_paths:
+            if ep in path:
+                breadcrumbs.remove(crumb)
+
         if len(breadcrumbs) > 10:
             breadcrumbs = [breadcrumbs[0]] + breadcrumbs[-9:]
+
         request.session['breadcrumbs'] = breadcrumbs
