@@ -49,11 +49,19 @@
 {% endblock %}
 
 {% block bootstrap5_content %}
-<div class="container-fluid border-bottom text-center bg-dark w-100">
-{% block breadcrumbs %}
-    <div class="text-white">breadcrumbs</div>
-{% endblock %}
-</div>
+<nav class="navbar bg-dark border-bottom border-body p-2" data-bs-theme="dark">
+    <div class="container">
+        <ol class="breadcrumb">
+          {% for crumb in breadcrumbs %}
+            {% if forloop.last %}
+              <li class="breadcrumb-item active text-white" aria-current="page">{{ crumb.name }}</li>
+            {% else %}
+              <li class="breadcrumb-item text-white"><a class="link-info link-offset-3" href="{{ crumb.url }}">{{ crumb.name }}</a></li>
+            {% endif %}
+          {% endfor %}
+        </ol>
+    </div>
+</nav>
 <div class="container bg-body bg-gradient text-light text-center my-5 py-5">
     <h2>{% block heading %}{% endblock %}</h2>
     {% block content %}{{ user.profile_picture.url }}{% endblock %}
