@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load bootstrap5 %}
+
+{% block heading %}Welcome, {{ user.username }}{% endblock %}
+
+{% block content %}
+<p>
+    Your profile is currently set to be
+    {% if user.is_player %}a player
+    {% elif user.is_dungeon_master %}
+    a dungeon master
+    {% endif %}
+</p>
+
+<div class="d-flex justify-content-around">
+    <img
+        src="{{ user.profile_picture.url }}"
+        alt="{{ user.username }}"
+        class="img-thumbnail"
+        style="max-width: 400px;"
+    >
+    <div class="d-flex justify-content-center">
+        {% if user.is_player %}
+        <h2>Characters</h2>
+        <ul>
+            {% for character in user.player.characters.all %}
+            <li>
+                <a href="{% url 'character_detail' character.id %}">
+                    {{ character.name }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% elif user.is_dungeon_master %}
+        <h2>Campaigns</h2>
+        <ul>
+            {% for campaign in user.dungeon_master.campaigns.all %}
+            <li>
+                <a href="{% url 'campaign_detail' campaign.id %}">
+                    {{ campaign.name }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

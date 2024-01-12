@@ -5,6 +5,8 @@ from django.contrib.auth.models import AbstractUser
 class User(AbstractUser):
     is_player = models.BooleanField(default=False)
     is_dungeon_master = models.BooleanField(default=False)
+    profile_picture = models.ImageField(
+        upload_to='profile_pictures/', default='default.png')
 
 
 class Player(models.Model):
