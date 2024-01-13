@@ -1,0 +1,24 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Django Tailwind</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        {% tailwind_css %}
+        {% block head %}{% endblock %}
+    </head>
+    
+    <body class="bg-gray-50 font-serif leading-normal tracking-normal">
+        <nav class="">
+            <p class="">Dnd Campaign Manager</p>
+        </nav>
+
+        {% block content %}{% endblock %}
+
+        <footer class="">
+            <p class="">Dnd Campaign Manager</p>
+        </footer>
+    </body>
+</html>
