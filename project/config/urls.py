@@ -15,7 +15,7 @@ def user_not_authenticated(user):
 urlpatterns = [
     # path('', include('app.urls')),
     path('admin/', admin.site.urls),
-    path('', TemplateView.as_view(template_name='base.html'), name='home'),
+    path('', TemplateView.as_view(template_name='home.html'), name='home'),
 
     path('accounts/', include([
         path('', include('django.contrib.auth.urls')),

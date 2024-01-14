@@ -1,0 +1,64 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>
+            {% block title %}Dnd Campaign Manager{% endblock %}
+        </title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        {% tailwind_css %}
+        <script src="{% static 'js/htmx.min.js' %}" defer></script>
+    </head>
+    
+    <body class="bg-main bg-cover bg-center bg-no-repeat bg-fixed">
+        <nav class="bg-slate-900">
+            <div class="flex h-16 items-center justify-between px-2">
+                <img 
+                    class="w-20"
+                    src="{% static 'assets/dnd_logo.png' %}"
+                    alt="DnD Logo"
+                >
+                <div class="flex">
+                    <a
+                        href="#"
+                        class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium"
+                        aria-current="page">
+                        Log in
+                    </a>
+                    <a
+                        href="#"
+                        class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+                    >
+                        Sign up
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <section>
+            <h2 class="text-center text-white mt-12">
+            {% block heading %}{% endblock %}
+            </h2>
+            <div class="container my-12 p-8 w-11/12 rounded-md bg-slate-900/45 text-white text-center">
+            {% block content %}{% endblock %}
+            </div>
+        </section>
+
+        <footer class="absolute inset-x-0 bottom-0 bg-slate-900">
+            <div class="flex h-12 items-center justify-center px-2">
+                <div class="text-center text-neutral-700 dark:text-neutral-200">
+                    © 2023 Copyright:
+                    <a
+                      class="text-neutral-800 dark:text-neutral-400"
+                      href="https://github.com/JacekZiolek"
+                    >
+                        Jack Herby
+                    </a>
+                </div>
+            </div>
+          </footer>
+    </body>
+    {% block test %}{% endblock %}
+</html>

@@ -7,7 +7,8 @@ _excluded_paths = [
     'player',
     'dungeon_master',
     'profile_pictures',
-    'favicon.ico'
+    'favicon.ico',
+    'admin'
 ]
 
 
