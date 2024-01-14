@@ -39,10 +39,17 @@ module.exports = {
          * Python: If you use Tailwind CSS classes in Python, uncomment the following line
          * and make sure the pattern below matches your project structure.
          */
-        // '../../**/*.py'
+        '../../**/*.py'
     ],
     theme: {
-        extend: {},
+        container: {
+            center: true,
+        },
+        extend: {
+            backgroundImage: {
+                'main': "url('/static/assets/mind_flayer.jpg')",
+            }
+        },
     },
     plugins: [
         /**
