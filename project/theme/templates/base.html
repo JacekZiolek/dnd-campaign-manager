@@ -1,0 +1,269 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>
+      {% block title %}Dnd Campaign Manager{% endblock %}
+    </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% tailwind_css %}
+    <script src="{% static 'js/htmx.min.js' %}" defer></script>
+  </head>
+  
+  <body class="bg-main bg-cover bg-center bg-no-repeat bg-fixed">
+    <nav class="bg-dnd-black">
+      <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+        <div class="relative flex h-16 items-center justify-between">
+          <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+            <!-- Mobile menu button-->
+            {% if user.is_authenticated %}
+            <button
+              type="button"
+              class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+              aria-controls="mobile-menu"
+              aria-expanded="false"
+              hx-on:click="
+                const mobileMenu = document.querySelector('#mobile-menu');
+                mobileMenu.classList.toggle('hidden');
+              "
+            >
+              <span class="absolute -inset-0.5"></span>
+              <span class="sr-only">Open main menu</span>
+              <!--
+                Icon when menu is closed.
+
+                Menu open: "hidden", Menu closed: "block"
+              -->
+              <svg
+                class="block h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                />
+              </svg>
+              <!--
+                Icon when menu is open.
+
+                Menu open: "block", Menu closed: "hidden"
+              -->
+              <svg
+                class="hidden h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+            {% endif %}
+          </div>
+          <div
+            class="flex flex-1 items-center justify-start ml-12 sm:m-0"
+          >
+            <div class="flex flex-shrink-0 items-center">
+              <img 
+                class="w-20"
+                src="{% static 'assets/dnd_logo.png' %}"
+                alt="DnD Logo"
+              >
+            </div>
+            {% if user.is_authenticated %}
+            <div class="hidden sm:ml-6 sm:block">
+              <div class="flex space-x-4">
+                <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+                <a
+                  href="#"
+                  class="bg-dnd-red hover:bg-dnd-primary-dark text-dnd-primary-light rounded-md border-2 border-solid border-dnd-primary-dark px-3 py-2 text-sm font-medium"
+                  aria-current="page"
+                >
+                  Characters
+                </a>
+                <a
+                  href="#"
+                  class="bg-dnd-red hover:bg-dnd-primary-dark text-dnd-primary-light rounded-md border-2 border-solid border-dnd-primary-dark px-3 py-2 text-sm font-medium"
+                >
+                    Campaigns
+                </a>
+              </div>
+            </div>
+            {% endif %}
+          </div>
+          {% if user.is_authenticated %} 
+          <div
+            class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
+          >
+            <button
+              type="button"
+              class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+            >
+              <span class="absolute -inset-1.5"></span>
+              <span class="sr-only">View notifications</span>
+              <svg
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"
+                />
+              </svg>
+            </button>
+            <!-- Profile dropdown -->
+            <div class="relative ml-3">
+              <div>
+                <button
+                  type="button"
+                  class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                  id="user-menu-button"
+                  aria-expanded="false"
+                  aria-haspopup="true"
+                  hx-on:click="
+                    const dropdownMenu = document.querySelector('#dropdown-menu');
+                    dropdownMenu.classList.toggle('hidden');
+                  "
+                >
+                  <span class="absolute -inset-1.5"></span>
+                  <span class="sr-only">Open user menu</span>
+                  <img
+                    class="h-8 w-8 rounded-full"
+                    src="{{ user.profile_picture.url }}"
+                    alt="{{ user.username }}"
+                  >
+                </button>
+              </div>
+
+              <!--
+                Dropdown menu, show/hide based on menu state.
+
+                Entering: "transition ease-out duration-100"
+                  From: "transform opacity-0 scale-95"
+                  To: "transform opacity-100 scale-100"
+                Leaving: "transition ease-in duration-75"
+                  From: "transform opacity-100 scale-100"
+                  To: "transform opacity-0 scale-95"
+              -->
+              <div
+                id="dropdown-menu"
+                class="hidden absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                role="menu"
+                aria-orientation="vertical"
+                aria-labelledby="user-menu-button"
+                tabindex="-1"
+              >
+                <!-- Active: "bg-gray-100", Not Active: "" -->
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm text-gray-700"
+                  role="menuitem"
+                  tabindex="-1"
+                  id="user-menu-item-0"
+                >
+                  Your Profile
+                </a>
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm text-gray-700"
+                  role="menuitem"
+                  tabindex="-1"
+                  id="user-menu-item-1"
+                >
+                  Settings
+                </a>
+                <a
+                  href="{% url "logout" %}"
+                  class="block px-4 py-2 text-sm text-gray-700"
+                  role="menuitem"
+                  tabindex="-1"
+                  id="user-menu-item-2"
+                >
+                    Sign out
+                </a>
+              </div>
+            </div>
+          </div>
+          {% else %}
+          <div class="flex justify-center items-center">
+            <button
+              class="bg-dnd-primary-light hover:bg-dnd-light text-dnd-primary-dark text-sm font-medium rounded-md border-2 border-solid border-dnd-primary-dark py-2 px-4 mr-2"
+              href="{% url "signup" %}"
+            >
+              Sign Up
+            </button>
+            <button
+              class="bg-dnd-primary-dark hover:bg-dnd-red text-dnd-primary-light text-sm font-medium rounded-md border-2 border-solid border-dnd-primary-light py-1 px-3"
+              href="{% url "login" %}"
+            >
+              Log In
+            </button>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Mobile menu, show/hide based on menu state. -->
+      <div class="sm:hidden hidden" id="mobile-menu">
+        <div class="space-y-1 px-2 pb-3 pt-2">
+          <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+          <a
+            href="#"
+            class="block bg-dnd-red hover:bg-dnd-primary-dark text-dnd-primary-light rounded-md border-2 border-solid border-dnd-primary-dark px-3 py-2 text-sm font-medium"
+            aria-current="page">
+              Characters
+          </a>
+          <a
+            href="#"
+            class="block bg-dnd-red hover:bg-dnd-primary-dark text-dnd-primary-light rounded-md border-2 border-solid border-dnd-primary-dark px-3 py-2 text-sm font-medium"
+          >
+            Campaigns
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <section>
+      <div
+        class="container mt-12 p-6 w-11/12 rounded-md bg-dnd-light/70 text-center text-dnd-primary-dark text-2xl"
+      >
+        <h2>
+        {% block heading %}{% endblock %}
+        </h2>
+      </div>
+      <div
+        class="container mt-12 p-6 w-11/12 rounded-md bg-dnd-light/70 text-center text-dnd-primary-dark text-base"
+      >
+      {% block content %}{% endblock %}
+      </div>
+    </section>
+
+    <footer class="absolute inset-x-0 bottom-0 bg-dnd-black">
+      <div class="flex h-12 items-center justify-center px-2">
+        <div class="text-center text-dnd-primary-light">
+          © 2023 Copyright:
+          <a
+            class="text-dnd-primary-light"
+            href="https://github.com/JacekZiolek"
+          >
+            Jack Herby
+          </a>
+        </div>
+      </div>
+    </footer>
+  </body>
+  {% block test %}{% endblock %}
+</html>
