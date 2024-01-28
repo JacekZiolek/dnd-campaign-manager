@@ -16,7 +16,6 @@ Django==5.0
 django-debug-toolbar==4.2.0
 django-htmx==1.16.0
 django-tailwind==3.8.0
-django-types==0.19.1
 executing==2.0.0
 Faker==20.1.0
 greenlet==3.0.3
@@ -63,5 +62,8 @@ toml==0.10.2
 traitlets==5.10.1
 types-psycopg2==2.9.21.20240118
 types-python-dateutil==2.8.19.20240106
+types-pytz==2023.3.1.1
+types-PyYAML==6.0.12.12
+typing_extensions==4.9.0
 urllib3==2.1.0
 wcwidth==0.2.8
