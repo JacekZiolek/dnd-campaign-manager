@@ -1,18 +1,19 @@
-from django.db import transaction
 from django.contrib.auth.forms import UserCreationForm
-from .models import User, Player, DungeonMaster
+from django.db import transaction
+
+from .models import DungeonMaster, Player, User
 
 
 class SignUpForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = ('username', 'email', 'password1', 'password2')
+        fields = ("username", "email", "password1", "password2")
 
 
 class PlayerSignUpForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = ('username', 'email', 'password1', 'password2')
+        fields = ("username", "email", "password1", "password2")
 
     @transaction.atomic
     def save(self):
@@ -26,7 +27,7 @@ class PlayerSignUpForm(UserCreationForm):
 class DungeonMasterSignUpForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = ('username', 'email', 'password1', 'password2')
+        fields = ("username", "email", "password1", "password2")
 
     @transaction.atomic
     def save(self):
