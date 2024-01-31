@@ -1,4 +1,70 @@
-<form action="" method="post" class="form w-50 mx-auto">
-  {{ form }}
+<form method="post" class="">
+  <div class="flex flex-col justify-center items-center mb-5">
+    <label
+      for="{{ form.username.id_for_label }}"
+      class="text-base mb-3"
+    >
+      Username:
+    </label>
+    <input
+      id="{{ form.username.id_for_label }}"
+      class="rounded-lg border-2 border-dnd-red focus:border-dnd-primary-dark text-dnd-primary-dark mb-3"
+      type="text"
+      name="{{ form.username.html_name }}"
+      autocomplete="{{ form.username.html_name }}"
+      required
+    />
+    <p class="text-base mb-3">{{ form.username.help_text }}</p>
+  </div>
+  <div class="flex flex-col justify-center items-center mb-5">
+    <label
+      for="{{ form.email.id_for_label }}"
+      class="text-base mb-3"
+    >
+      E-mail:
+    </label>
+    <input
+      id="{{ form.email.id_for_label }}"
+      class="rounded-lg border-2 border-dnd-red focus:border-dnd-primary-dark text-dnd-primary-dark mb-3"
+      type="email"
+      name="{{ form.email.html_name }}"
+      autocomplete="{{ form.email.html_name }}"
+      required
+    />
+  </div>
+  <div class="flex flex-col justify-center items-center mb-5">
+    <label
+      for="{{ form.password1.id_for_label }}"
+      class="text-base mb-3"
+    >
+      Password:
+    </label>
+    <input
+      id="{{ form.password1.id_for_label }}"
+      class="rounded-lg border-2 border-dnd-red focus:border-dnd-primary-dark text-dnd-primary-dark mb-3"
+      type="password"
+      name="{{ form.password1.html_name }}"
+      autocomplete="{{ form.password1.html_name }}"
+      required
+    />
+    {{ form.password1.help_text }}
+  </div>
+  <div class="flex flex-col justify-center items-center mb-5">
+    <label
+      for="{{ form.password2.id_for_label }}"
+      class="text-base mb-3"
+    >
+      Repeat password:
+    </label>
+    <input
+      id="{{ form.password2.id_for_label }}"
+      class="rounded-lg border-2 border-dnd-red focus:border-dnd-primary-dark text-dnd-primary-dark mb-3"
+      type="password"
+      name="{{ form.password2.html_name }}"
+      autocomplete="{{ form.password2.html_name }}"
+      required
+    />
+    <p class="text-base mb-3">{{ form.password2.help_text }}</p>
+  </div>
   <button type="submit">{{ btn }}</button>
 </form>
