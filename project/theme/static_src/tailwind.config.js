@@ -54,7 +54,7 @@ module.exports = {
         'dnd-red': '#930C10',
       },
       backgroundImage: {
-        'main': "url('/static/assets/mind_flayer.jpg')",
+        'main': "url('/static/assets/home.jpg')",
       }
     },
   },
