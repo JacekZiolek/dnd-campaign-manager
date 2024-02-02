@@ -1,3 +1,4 @@
+from app.views import profile, user_authentication
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
@@ -5,8 +6,6 @@ from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import include, path
 from django.views.generic import TemplateView
-
-from app.views import profile, user_authentication
 
 
 def user_not_authenticated(user):
