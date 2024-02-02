@@ -1,78 +1,28 @@
-<form method="post" class="">
-  {% csrf_token %}
-  <div class="flex flex-col justify-center items-center mb-5">
-    <label
-      for="{{ form.username.id_for_label }}"
-      class="text-base mb-1"
-    >
-      Username:
-    </label>
-    <input
-      id="{{ form.username.id_for_label }}"
-      class="rounded-lg border-2 border-dnd-red focus:border-dnd-primary-dark text-dnd-primary-dark mb-1"
-      type="text"
-      name="{{ form.username.html_name }}"
-      autocomplete="{{ form.username.html_name }}"
-      required
-    />
-    <p class="text-base">{{ form.username.help_text }}</p>
-  </div>
-  <div class="flex flex-col justify-center items-center mb-5">
-    <label
-      for="{{ form.email.id_for_label }}"
-      class="text-base mb-1"
-    >
-      E-mail:
-    </label>
-    <input
-      id="{{ form.email.id_for_label }}"
-      class="rounded-lg border-2 border-dnd-red focus:border-dnd-primary-dark text-dnd-primary-dark"
-      type="email"
-      name="{{ form.email.html_name }}"
-      autocomplete="{{ form.email.html_name }}"
-      required
-    />
-  </div>
-  <div class="flex flex-col justify-center items-center mb-5">
-    <label
-      for="{{ form.password1.id_for_label }}"
-      class="text-base mb-1"
-    >
-      Password:
-    </label>
-    <input
-      id="{{ form.password1.id_for_label }}"
-      class="rounded-lg border-2 border-dnd-red focus:border-dnd-primary-dark text-dnd-primary-dark mb-1"
-      type="password"
-      name="{{ form.password1.html_name }}"
-      autocomplete="{{ form.password1.html_name }}"
-      required
-    />
-    <div class="text-base mb-1 list-none"
-      {{ form.password1.help_text }}
-    </div>
-  </div>
-  <div class="flex flex-col justify-center items-center mb-5">
-    <label
-      for="{{ form.password2.id_for_label }}"
-      class="text-base mb-1"
-    >
-      Repeat password:
-    </label>
-    <input
-      id="{{ form.password2.id_for_label }}"
-      class="rounded-lg border-2 border-dnd-red focus:border-dnd-primary-dark text-dnd-primary-dark mb-1"
-      type="password"
-      name="{{ form.password2.html_name }}"
-      autocomplete="{{ form.password2.html_name }}"
-      required
-    />
-    <p class="text-base">{{ form.password2.help_text }}</p>
-  </div>
-  <button
-    class="bg-dnd-red rounded-md border-2 border-dnd-primary-dark text-base text-dnd-light py-2 px-4"
-    type="submit"
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+<form
+  id="signup-buttons"
+  class="d-flex justify-content-center"
+  hx-target="#signup-buttons"
   >
-    {{ btn }}
+  {% csrf_token %}
+  <button
+    class="btn btn-primary mx-2"
+    hx-post="{% url 'player_signup' %}"
+    hx-swap="outerHTML"
+    >
+    Player Profile
+  </button>
+  <button
+    class="btn btn-primary mx-2"
+    hx-post="{% url 'dungeon_master_signup' %}"
+    hx-swap="outerHTML"
+    >
+    Dungeon Master Profile
   </button>
 </form>
+{% endblock %}

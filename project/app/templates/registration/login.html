@@ -1,72 +1,27 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+
+{% block title %}{% endblock %}
 
 {% block heading %}
-  Log into your account
+{% if user.is_authenticated %}
+You're logged in as {{ user.username }}
+{% else %}
+Log into your account
+{% endif %}
 {% endblock %}
 
 {% block content %}
-  {% if form.errors %}
-    <p>Your username and password didn't match. Please try again.</p>
-  {% endif %}
-  {{ form.non_field_errors }}
+{% if user.is_authenticated %}
+Some content for logged in users
+{% else %}
+<form action="" method="post" class="form w-50 mx-auto mt-5">
+  {% csrf_token %}
 
-  {% if next %}
-    {% if user.is_authenticated %}
-      <p>
-        Your account doesn't have access to this page. To proceed, please login with an account that has access.
-      </p>
-    {% else %}
-      <p>Please login to see this page.</p>
-    {% endif %}
-  {% endif %}
-
-  <form method="POST" class="mb-12">
-    {% csrf_token %}
-    <div class="flex flex-col justify-center items-center mb-5">
-      {{ form.username.errors }}
-      <label
-        for="{{ form.username.id_for_label }}"
-        class="text-base mb-3"
-      >
-        Username:
-      </label>
-      <input
-        id="{{ form.username.id_for_label }}"
-        class="rounded-lg border-2 border-dnd-red focus:border-dnd-primary-dark text-dnd-primary-dark"
-        type="text"
-        name="{{ form.username.html_name }}"
-        autocomplete="{{ form.username.html_name }}"
-        required
-      />
-    </div>
-    <div class="flex flex-col justify-center items-center mb-5">
-      {{ form.password.errors }}
-      <label
-        for="{{ form.password.id_for_label }}"
-        class="text-base mb-3"
-      >
-        Password:
-      </label>
-      <input
-        id="{{ form.password.id_for_label }}"
-        class="rounded-lg border-2 border-dnd-red focus:border-dnd-primary-dark text-dnd-primary-dark"
-        type="password"
-        name="{{ form.password.html_name }}"
-        autocomplete="current-password"
-        required
-      />
-    </div>
-    <button
-      type="submit"
-      class="bg-dnd-primary-dark hover:bg-dnd-red text-lg text-dnd-primary-light rounded-md border-2 border-solid border-dnd-primary-light py-2 px-4"
-    >
-      Log in
-    </button>
-  </form>
-
-  {# Assumes you set up the password_reset view in your URLconf #}
-  <p class="text-base">
-    <a href="{% url 'password_reset' %}">Lost password?</a>
-  </p>
+  {% bootstrap_form form class='p-3' %}
+  <br/>
+  {% bootstrap_button button_type="submit" content='Log in' %}
+  {% bootstrap_form_errors form layout='inline' %}
+</form>
+{% endif %}
 {% endblock %}
-
