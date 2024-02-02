@@ -15,7 +15,7 @@ def player_signup(request):
         form = SignUpForm()
         ctx = {
             "form": form,
-            "btn": "Sign Up As Player",
+            "btn": "Sign Up As A Player",
             "session": request.session["user_type"],
         }
         return render(request, "registration/signup_form.html", ctx)
@@ -29,7 +29,7 @@ def dungeon_master_signup(request):
         form = SignUpForm()
         ctx = {
             "form": form,
-            "btn": "Sign Up As Dungeon Master",
+            "btn": "Sign Up As A Dungeon Master",
             "session": request.session["user_type"],
         }
         return render(request, "registration/signup_form.html", ctx)
