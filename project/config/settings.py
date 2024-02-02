@@ -55,7 +55,6 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django_htmx.middleware.HtmxMiddleware",
-    "app.middleware.BreadcrumbsMiddleware",
 ]
 
 ROOT_URLCONF = "config.urls"
@@ -71,7 +70,6 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                "app.context_processors.breadcrumbs",
             ],
         },
     },
