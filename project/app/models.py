@@ -8,6 +8,7 @@ class User(AbstractUser):
     profile_picture = models.ImageField(
         upload_to="profile_pictures/", default="profile_pictures/default.png"
     )
+    email = models.EmailField(unique=True)
 
 
 class Player(models.Model):
