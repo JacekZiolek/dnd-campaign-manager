@@ -72,11 +72,13 @@
             class="flex flex-1 items-center justify-start ml-12 sm:m-0"
           >
             <div class="flex flex-shrink-0 items-center">
-              <img 
-                class="w-20"
-                src="{% static 'assets/dnd_logo.png' %}"
-                alt="DnD Logo"
-              >
+              <a href="{% url 'home' %}">
+                <img 
+                  class="w-20"
+                  src="{% static 'assets/dnd_logo.png' %}"
+                  alt="DnD Logo"
+                >
+              </a>
             </div>
             {% if user.is_authenticated %}
             <div class="hidden sm:ml-6 sm:block">
