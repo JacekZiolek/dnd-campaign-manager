@@ -8,7 +8,9 @@ class User(AbstractUser):
     profile_picture = models.ImageField(
         upload_to="profile_pictures/", default="profile_pictures/default.png"
     )
-    email = models.EmailField(unique=True)
+    email = models.EmailField(
+        unique=True, error_messages={"unique": "This email has already been taken."}
+    )
 
 
 class Player(models.Model):
