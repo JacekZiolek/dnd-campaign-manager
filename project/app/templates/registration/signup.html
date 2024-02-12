@@ -9,19 +9,91 @@
     hx-target="#signup-buttons"
   >
     {% csrf_token %}
+    {{ form }}
+    <div class="border-b-2 w-full"
+    <div>
+      <p class="text-base">{{ form.non_field_errors }}<p>
+    </div>
+    <div class="flex flex-col justify-center items-center mb-5">
+      <label
+        for="{{ form.username.id_for_label }}"
+        class="text-base mb-1"
+      >
+        Username:
+      </label>
+      <input
+        id="{{ form.username.id_for_label }}"
+        class="rounded-lg border-2 border-dnd-red focus:border-dnd-primary-dark text-dnd-primary-dark mb-1"
+        type="text"
+        name="{{ form.username.html_name }}"
+        autocomplete="{{ form.username.html_name }}"
+        required
+      />
+      {% if form.username.errors %}
+        {% for error in form.username.errors %}
+          <p class="text-base text-dnd-red">{{ error }}</p>
+        {% endfor %}
+      {% else %}
+        <p class="text-base">{{ form.username.help_text }}</p>
+      {% endif %}
+    </div>
+    <div class="flex flex-col justify-center items-center mb-5">
+      <label
+        for="{{ form.email.id_for_label }}"
+        class="text-base mb-1"
+      >
+        E-mail:
+      </label>
+      <input
+        id="{{ form.email.id_for_label }}"
+        class="rounded-lg border-2 border-dnd-red focus:border-dnd-primary-dark text-dnd-primary-dark"
+        type="email"
+        name="{{ form.email.html_name }}"
+        autocomplete="{{ form.email.html_name }}"
+        required
+      />
+    </div>
+    <div class="flex flex-col justify-center items-center mb-5">
+      <label
+        for="{{ form.password1.id_for_label }}"
+        class="text-base mb-1"
+      >
+        Password:
+      </label>
+      <input
+        id="{{ form.password1.id_for_label }}"
+        class="rounded-lg border-2 border-dnd-red focus:border-dnd-primary-dark text-dnd-primary-dark mb-1"
+        type="password"
+        name="{{ form.password1.html_name }}"
+        autocomplete="{{ form.password1.html_name }}"
+        required
+      />
+      <div class="text-base mb-1 list-none"
+        {{ form.password1.help_text }}
+      </div>
+    </div>
+    <div class="flex flex-col justify-center items-center mb-5">
+      <label
+        for="{{ form.password2.id_for_label }}"
+        class="text-base mb-1"
+      >
+        Repeat password:
+      </label>
+      <input
+        id="{{ form.password2.id_for_label }}"
+        class="rounded-lg border-2 border-dnd-red focus:border-dnd-primary-dark text-dnd-primary-dark mb-1"
+        type="password"
+        name="{{ form.password2.html_name }}"
+        autocomplete="{{ form.password2.html_name }}"
+        required
+      />
+      <p class="text-base">{{ form.password2.help_text }}</p>
+    </div>
     <button
       class="bg-dnd-red rounded-md border-2 border-dnd-primary-dark text-base text-dnd-light py-2 px-4"
-      hx-post="{% url 'player_signup' %}"
-      hx-swap="outerHTML"
-      >
-      Player Profile
-    </button>
-    <button
-      class="bg-dnd-red rounded-md border-2 border-dnd-primary-dark text-base text-dnd-light py-2 px-4"
-      hx-post="{% url 'dungeon_master_signup' %}"
-      hx-swap="outerHTML"
-      >
-      Dungeon Master Profile
+      type="submit"
+    >
+      Create account
     </button>
   </form>
 {% endblock %}

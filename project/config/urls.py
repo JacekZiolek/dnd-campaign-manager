@@ -28,16 +28,6 @@ urlpatterns = [
                     ),
                     name="signup",
                 ),
-                path(
-                    "signup/player/",
-                    user_authentication.player_signup,
-                    name="player_signup",
-                ),
-                path(
-                    "signup/dungeon_master/",
-                    user_authentication.dungeon_master_signup,
-                    name="dungeon_master_signup",
-                ),
                 path("login/", LoginView.as_view(), name="login"),
                 path("logout/", LogoutView.as_view(), name="logout"),
                 path("profile/", profile.ProfileView.as_view(), name="profile"),

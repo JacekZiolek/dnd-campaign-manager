@@ -1,38 +1,10 @@
 from django.contrib.auth import login
 from django.contrib.auth.mixins import UserPassesTestMixin
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect
 from django.views.generic import CreateView
 
 from ..forms import SignUpForm
 from ..models import DungeonMaster, Player, User
-
-
-def player_signup(request):
-    if request.method == "GET":
-        return redirect("/accounts/signup/")
-    if request.method == "POST":
-        request.session["user_type"] = "player"
-        form = SignUpForm()
-        ctx = {
-            "form": form,
-            "btn": "Sign Up As A Player",
-            "session": request.session["user_type"],
-        }
-        return render(request, "registration/signup_form.html", ctx)
-
-
-def dungeon_master_signup(request):
-    if request.method == "GET":
-        return redirect("/accounts/signup/")
-    if request.method == "POST":
-        request.session["user_type"] = "dungeon_master"
-        form = SignUpForm()
-        ctx = {
-            "form": form,
-            "btn": "Sign Up As A Dungeon Master",
-            "session": request.session["user_type"],
-        }
-        return render(request, "registration/signup_form.html", ctx)
 
 
 class SignUpView(UserPassesTestMixin, CreateView):
