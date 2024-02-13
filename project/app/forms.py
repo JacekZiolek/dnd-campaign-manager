@@ -5,18 +5,16 @@ from .models import User
 
 
 class SignUpForm(UserCreationForm):
+    profile_type = forms.ChoiceField(
+        choices=(("is_player", "Player"), ("is_dungeon_master", "Dungeon Master")),
+        widget=forms.RadioSelect(),
+    )
+
     class Meta(UserCreationForm.Meta):
         model = User
         fields = (
-            "is_player",
-            "is_dungeon_master",
             "username",
             "email",
             "password1",
             "password2",
         )
-
-        widgets = {
-            "is_player": forms.RadioSelect(),
-            "is_dungeon_master": forms.RadioSelect(),
-        }
