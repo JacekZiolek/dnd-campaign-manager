@@ -14,13 +14,18 @@
     </div>
     <div class="flex flex-col justify-center items-center mb-5">
       <fieldset>
-        <legend>Choose your profile type:</legend>
+        <legend class="text-lg mx-auto mb-1">Choose your profile type:</legend>
         <div>
           {% for value, label in form.profile_type.field.choices %}
-            <label for="{{ form.profile_type.id_for_label}}_{{ forloop.counter0 }}">{{ label }}</label>
+            <label
+              class="text-base mb-1"
+              for="{{ form.profile_type.name}}_{{ forloop.counter0 }}"
+            >
+              {{ label }}
+            </label>
             <input
               type="radio"
-              id="{{ form.profile_type.field.id_for_label }}_{{ forloop.counter0 }}"
+              id="{{ form.profile_type.name}}_{{ forloop.counter0 }}"
               name="{{ form.profile_type.name }}" value="{{ value }}"
               {% if value == form.profile_type.value %} checked {% endif %}
             >
