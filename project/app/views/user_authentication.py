@@ -13,10 +13,11 @@ class SignUpView(UserPassesTestMixin, CreateView):
     template_name = "registration/signup.html"
 
     def form_valid(self, form):
-        user_type = self.request.session["user_type"]
         user = form.save(commit=False)
-        user.is_player = user_type == "player"
-        user.is_dungeon_master = user_type == "dungeon_master"
+        user.is_player = form.cleaned_data.get("player_type") == "is_player"
+        user.is_dungeon_master = (
+            form.cleaned_data.get("player_type") == "is_dungeon_master"
+        )
         user.save()
         if user.is_player:
             Player.objects.create(user=user)
